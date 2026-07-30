@@ -1,1 +1,1 @@
-python DarkGPT.py
+python main.py
