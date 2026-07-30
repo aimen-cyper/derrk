@@ -1,0 +1,19 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# DarkGPT v4.0 - Production Dependencies
+# Architect: AYMEN
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Telegram Bot Framework (v20+ for ApplicationBuilder API)
+python-telegram-bot==20.7
+
+# Google Gemini AI API
+google-generativeai==0.8.3
+
+# Web Search (DuckDuckGo - No API Key Required)
+duckduckgo-search==6.3.3
+
+# HTTP Client (Required by google-generativeai)
+httpx==0.27.2
+
+# Async Support
+anyio==4.6.2.post1
