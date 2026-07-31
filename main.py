@@ -134,11 +134,12 @@ logger.info(f"   👤 Admin ID: {ADMIN_ID}")
 logger.info("=" * 60)
 # إعدادات نماذج Gemini
 GEMINI_MODELS = [
-    "gemini-2.5-flash",
-    "gemini-2.5-pro",
     "gemini-flash-latest",
-    "gemini-pro-latest",
-    "gemini-2.0-flash",
+    "gemini-flash-lite-latest",
+    "gemini-3.6-flash",
+    "gemini-3.5-flash-lite",
+    "gemini-3.1-flash-lite",
+    "gemini-3-flash-preview"
 ]
 
 # إعدادات الأداء
@@ -157,7 +158,7 @@ DAILY_PROJECT_LIMIT = 3          # الحد اليومي من المشاريع �
 REFERRAL_REWARD_BASE = 10        # مكافأة الإحالة الأساسية
 REFERRAL_REWARD_TIERED = 15      # مكافأة الإحالة بعد 3 إحالات
 NEW_USER_BONUS = 5               # نقاط الترحيب للمستخدم الجديد
-DAILY_BONUS = 3                  # المكافأة اليومية
+DAILY_BONUS = 1                  # المكافأة اليومية
 SUBSCRIPTION_CACHE_HOURS = 6     # مدة تخزين حالة الاشتراك
 RATE_LIMIT_SECONDS = 4           # الحد الأدنى بين الرسائل
 
