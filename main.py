@@ -155,9 +155,9 @@ MAX_HISTORY = 20
 POINTS_PER_MESSAGE = 1           # تكلفة الرسالة العادية
 PROJECT_COST = 5                 # تكلفة بناء المشروع
 DAILY_PROJECT_LIMIT = 3          # الحد اليومي من المشاريع لكل مستخدم
-REFERRAL_REWARD_BASE = 10        # مكافأة الإحالة الأساسية
-REFERRAL_REWARD_TIERED = 15      # مكافأة الإحالة بعد 3 إحالات
-NEW_USER_BONUS = 5               # نقاط الترحيب للمستخدم الجديد
+REFERRAL_REWARD_BASE = 1        # مكافأة الإحالة الأساسية
+REFERRAL_REWARD_TIERED = 2      # مكافأة الإحالة بعد 3 إحالات
+NEW_USER_BONUS = 1               # نقاط الترحيب للمستخدم الجديد
 DAILY_BONUS = 1                  # المكافأة اليومية
 SUBSCRIPTION_CACHE_HOURS = 6     # مدة تخزين حالة الاشتراك
 RATE_LIMIT_SECONDS = 4           # الحد الأدنى بين الرسائل
@@ -3117,28 +3117,35 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
         
         # ═══════════════════════════════════════════
-        # عن النظام
+        # عن النظام (نسخة فخمة وموجهة للمستخدم)
         # ═══════════════════════════════════════════
         elif data == "about":
             await query.edit_message_text(
-                f"💀 <b>DarkGPT SYSTEM REPORT v4.0</b>\n\n"
-                f"السلاح الأقوى في العالم الرقمي.\n"
-                f"صممه: <b>{html_escape(DEVELOPER)}</b>\n"
-                f"📞 @{html_escape(DEV_USERNAME)}\n\n"
-                f"<b>المواصفات التقنية:</b>\n"
-                f"🔑 {len(GEMINI_KEYS)} Gemini Keys\n"
-                f"🧠 {len(GEMINI_MODELS)} نماذج ذكاء اصطناعي\n"
-                f"💾 قاعدة بيانات SQLite (WAL Mode)\n"
-                f"🛡️ Anti-Jailbreak متقدم\n"
-                f"📦 دعم بناء المشاريع (ZIP)\n"
-                f"🔍 بحث في الويب مدمج\n"
-                f"📄 محلل ملفات\n"
-                f"⚡ Priority Queue System\n"
-                f"🎁 نظام نقاط وإحالات\n"
-                f"📊 حد يومي للمشاريع\n"
-                f"🔥 Power Level: Maximum",
+                f"💀 <b>DarkGPT | السلاح الرقمي الأذكى</b>\n\n"
+                f"مرحباً بك في الجيل الجديد من مساعدي الذكاء الاصطناعي.\n"
+                f"نظام متكامل، سريع، ومُصمم خصيصاً للمحترفين.\n\n"
+                
+                f"🚀 <b>ماذا يمكنك أن تفعل هنا؟</b>\n"
+                f"• 📦 <b>بناء مشاريع برمجية:</b> اطلب أي كود وسيتم تسليمه كملف ZIP جاهز للتشغيل.\n"
+                f"• 📄 <b>تحليل الملفات:</b> ارفع ملفاتك (Python, JS, JSON..) لاكتشاف الثغرات وتحسينها.\n"
+                f"• 🔍 <b>بحث ذكي في الويب:</b> احصل على أحدث المعلومات والروابط المباشرة من الإنترنت.\n"
+                f"• ⚔️ <b>استشارات وحلول:</b> إجابات دقيقة، احترافية، وبدون قيود.\n\n"
+                
+                f"💎 <b>نظام النقاط والمكافآت:</b>\n"
+                f"• 🎁 احصل على <b>{NEW_USER_BONUS}</b> نقاط مجانية فور البدء.\n"
+                f"• 👥 ادعُ صديقاً عبر رابطك واحصل على <b>{REFERRAL_REWARD_BASE}</b> نقطة لكل دعوة.\n"
+                f"• 📅 استلم مكافأتك اليومية بضغطة زر.\n\n"
+                
+                f"🛡️ <b>الأمان والخصوصية:</b>\n"
+                f"محادثاتك مشفرة، ذاكرة البوت تحترم خصوصيتك، ويمكنك مسحها في أي وقت.\n\n"
+                
+                f"⚡ <b>صُمم بواسطة:</b> @{html_escape(DEV_USERNAME)}\n"
+                f"📢 <b>تابعنا:</b> <a href='{CHANNEL_URL}'>Cybersecurity YEMEN</a>\n\n"
+                
+                f"🔥 <i>Power Level: Maximum | Architect: {html_escape(DEVELOPER)}</i>",
                 reply_markup=menu,
-                parse_mode='HTML'
+                parse_mode='HTML',
+                disable_web_page_preview=True
             )
         
         # ═══════════════════════════════════════════
