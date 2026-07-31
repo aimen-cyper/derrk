@@ -91,28 +91,47 @@ logger = logging.getLogger("DarkGPT_v4")
 # SECTION 3: CONFIGURATION CONSTANTS
 # ═══════════════════════════════════════════════════════════════════════════════
 
-# مفاتيح Gemini API
-GEMINI_KEYS = [
-    "AIzaSyBvHDZ-ukrfT0NE0nVHrVRAY0DiLqCereI",
-    "AIzaSyC1xnTO1BRkioflHd88ZnJOVfIX0lRby5E",
-    "AIzaSyC8pCeujjEuwWzcAfazEt1A_De6vLj9biA",
-    "AIzaSyCAv1DJ_ASSNTPV9bdK0FnBo98rTSJDBBA",
-    "AIzaSyBlAn4tin549Leb7P8QxgCthN57Y0P2iko",
-    "AIzaSyCshRi0RBcgZFh77Wcm-SGl8jfly-71bes",
-    "AIzaSyCdr9IHLAMN--xDsqtkdLBOOFvDvxnyPyo",
-    "AIzaSyBbt1Sl4neLY2RSw-CnNymcX-cbCKH-si0",
-    "AIzaSyCpjqZjnVyrbtSD1qm0pyaLQLmDreRPgp0",
-    "AIzaSyBvLO1EdMRlDe8S-Rb3yMKsii7Dw3l_daQ",
-]
+import os
 
-# إعدادات تليجرام
-TELEGRAM_TOKEN = "8743780549:AAGcI7i_LB3OCtLCL8iPuph7ABVkDw3r7Cw"
+# ═══ محاولة تحميل ملف .env (للتطوير المحلي) ═══
+try:
+    from dotenv import load_dotenv
+    from pathlib import Path
+    env_path = Path('.') / '.env'
+    if env_path.exists():
+        load_dotenv(env_path)
+        logger.info("✅ تم تحميل ملف .env بنجاح")
+except ImportError:
+    pass  # مكتبة python-dotenv غير مثبتة، لا مشكلة
+
+# ═══ مفاتيح Gemini API (تُقرأ من Railway Variables أو .env) ═══
+GEMINI_KEYS_RAW = os.getenv("GEMINI_KEYS", "")
+GEMINI_KEYS = [k.strip() for k in GEMINI_KEYS_RAW.split(",") if k.strip()]
+
+if not GEMINI_KEYS:
+    logger.error("❌ لا توجد مفاتيح Gemini! تأكد من Railway Variables أو ملف .env")
+
+# ═══ إعدادات تليجرام (تُقرأ من Railway Variables أو .env) ═══
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "")
 DEVELOPER = "AYMEN"
-ADMIN_ID = 8431116042
-DEV_USERNAME = "z_iik"
-CHANNEL_USERNAME = "Cybersecurity_YEMEN_0"
+ADMIN_ID = int(os.getenv("ADMIN_ID", "8431116042"))
+DEV_USERNAME = os.getenv("DEV_USERNAME", "z_iik")
+CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME", "Cybersecurity_YEMEN_0")
 CHANNEL_URL = f"https://t.me/{CHANNEL_USERNAME}"
 
+# فحص أمني
+if not TELEGRAM_TOKEN:
+    logger.error("❌ TELEGRAM_TOKEN غير موجود!")
+if not GEMINI_KEYS:
+    logger.error("❌ GEMINI_KEYS غير موجود!")
+
+# ═══ عرض معلومات الأمان عند البدء ═══
+logger.info("=" * 60)
+logger.info("🔐 معلومات الأمان:")
+logger.info(f"   🔑 عدد مفاتيح Gemini: {len(GEMINI_KEYS)}")
+logger.info(f"   🤖 Token موجود: {'✅' if TELEGRAM_TOKEN else '❌'}")
+logger.info(f"   👤 Admin ID: {ADMIN_ID}")
+logger.info("=" * 60)
 # إعدادات نماذج Gemini
 GEMINI_MODELS = [
     "gemini-2.5-flash",
@@ -127,6 +146,7 @@ MAX_OUTPUT_TOKENS = 16000
 REQUEST_TIMEOUT = 90
 WORKER_COUNT = 3
 MAX_HISTORY = 20
+
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # إعدادات الاقتصاد (Economy) - قابلة للتعديل من لوحة الأدمن
